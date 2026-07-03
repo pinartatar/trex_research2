@@ -6,19 +6,19 @@ Uygulamaları ve ihtiyaç duydukları tüm gereksinimleri tek bir paket içinde 
 container denir.
 Tanımlar:
 - Image: Bir uygulamanın çalışması için gereken kodları, kütüphaneleri ve ayarları içeren şablon.
-- Container: İmajların çalıştırılabilir, aktif ve izole edilmiş halidir.
-- Ducker Hub: Geliştiricilerin hazır yazılım imajlarını paylaştığı ve sakladığı genel bir depodur.
+- Container: İmajların çalıştırılabilir hali.
+- Ducker Hub: yazılım imajlarının paylaşıldığı ve saklandığı genel bir depo.
 
 ## DBeaver Nedir?
 
-Veritabanlarını görsel bir arayüz üzerinden yönetmeyi sağlayan araçtır. Kod yazmadan tablolara göz atmak, veri eklemek, 
+Veritabanlarını görsel bir arayüz üzerinden yöneten araçtır. Kod yazmadan tablolara göz atmak, veri eklemek, 
 sorgu çalıştırmak, ve veritabanının yapısını görmek için kullanılır.
-Veriyi kendisi saklamaz, saklandığı yere baglanıp o veriyi görüntülemeyi ve yönetmeyi sağlar.
+Veriyi kendisi saklamaz veriyi görüntülemeyi ve yönetmeyi sağlar.
 
 
 ## Primary Key Nedir?
 
-Bir veritabanı tablosundaki her bir kaydı benzersiz(unique) biçimde tanımlayan sütun yada sütun gruplarıdır.
+Bir veritabanı tablosundaki her bir kaydı benzersiz(unique) biçimde tanımlayan sütun.
 Tablodaki bir kaydı kesin şekilde ayırt etmeye yarar.
 
 Temel Kuralları:
@@ -29,7 +29,7 @@ Temel Kuralları:
  ### Primary Key Oluşturma Örnegi:
  ```
 CREATE TABLE Ogrenci (
-    OgrenciNo INT PRIMARY KEY,   -- Birincil anahtar: benzersiz, boş olamaz
+    OgrenciNo INT PRIMARY KEY,  
     Ad NVARCHAR(50),
     Soyad NVARCHAR(50)
 );
@@ -38,9 +38,9 @@ CREATE TABLE Ogrenci (
 
 ## Foreign Key Nedir?
 
-Veritabanlarında iki tabloyu birbirine bağlamak ve tablolar arasındaki veri tutarlılığını sağlamak için kullanılan sütun 
-veya sütun grubudur.(Başka bir tablodaki primary key'i referans alır.)
-Bir tabloya ancak bağlı oldugu tablodan bir kayda işaret eden veri eklenebilir.
+Veritabanlarında iki tabloyu birbirine bağlamak için kullanılır. tablolar arasındaki veri tutarlılığını sağlar.
+(Başka bir tablodaki primary key'i referans alır.)
+Bir tabloya sadece bağlı oldugu tablodan kayda işaret eden veri eklenebilir.
 
 ### Foreign Key Oluşturma Örneği:
 
@@ -104,7 +104,7 @@ Geçerli kayıt eklendiğinde sorun çıkmaz.
 INSERT INTO Ogrenci VALUES (1, N'Nazlı', N'Demir');
 INSERT INTO Notlar  VALUES (100, 1, N'Veritabanı', 90);
 ```
-Ancak var olmayan bir ögrenci eklemeye çalışırsak,
+Ancak var olmayan bir ögrenci eklenemez.
 ```
 INSERT INTO Notlar VALUES (101, 999, N'Matematik', 70);
 SQL Server bu işlemi Error 547 ile reddeder: “The INSERT statement conflicted with the FOREIGN KEY constraint”.
@@ -115,17 +115,15 @@ SQL Server bu işlemi Error 547 ile reddeder: “The INSERT statement conflicted
 
 ## API Nedir? WinForms'tan Farkları Nelerdir?
 
-API, iki yazılımın birbiriyle konuşmasını, veri alıp göndermesini sağlayan bir arayüzdür.
-Bir API sayesinde, bir programın iç kodunu bilmeden onun sunduğu belirli istek noktaları üzerinden o programın verisini 
-veya işlevini kullanabiliriz.
+API, iki yazılımın birbiriyle konuşmasını ve veri alıp göndermesini sağlayan bir arayüzdür.
+Bir API sayesinde, bir programın iç kodunu bilmeden o programın verisini kullanabiliriz.
 
 Uygulama/kullanıcı bir şey ister, API isteği alır getirir, sunucu/veritabanı isteği işler veriyi hazırlar.
 
 WinForms ise .NET ile masaüstü uygulamaları geliştirmek için kullanılan bir arayüzdür.
-Butonlar, metin kutuları, formlar gibi görsel bileşenlerle kullanıcının dogrudan etkileşime girdigi 
-programdır.Kullanıcının bilgisayarında çalışır.
+Butonlar, metin kutuları, formlar gibi görsel bileşenlerle kullanıcıyla etkileşimdedir. kullanıcının bilgisayarından çalışır.
 
-WinForm, kullanıcının gördüğü ve tıkladığı ön yüz. API ise ekranı olmayan, veri sağlayan arka plan servisidir.
+WinForm, kullanıcının gördüğü ön yüz. API ise veri sağlayan arka plan servisidir.
 Birbirini tamamlayan katmanlardır.Bir WinForms uygulaması, API'ye istek göndererek veri çekebilir.
 
 | Özellik | API | WinForms | 
@@ -142,29 +140,30 @@ Birbirini tamamlayan katmanlardır.Bir WinForms uygulaması, API'ye istek gönde
 ### Server(sunucu)
 İstekleri karşılayan, veriyi tutan ve işleyen taraftır. Gelen işlemlere cevap verir.
 ### Client(istemci)
-Sunucudan bir şey isteyen taraftır. İsteği gönderir sunucunun döndüğü cevabı kullanır. Web tarayıcısı, mobil 
-uygulama,veya masaüstü bir program client olabilir.   
-
+Sunucudan bir şey isteyen taraftır. İsteği gönderir sunucunun döndüğü cevabı kullanır. 
+   
 Client istek gönderir -> Server işler -> Server cevap döner -> Client cevabı kullanır
 
 ### WinForms bir Client midir? 
-Bir WinForms uygulaması bir API'ye istek gönderip cevabı kullandığında client rolündedir. Kendi içinde veriyi sunmaz 
-veriyi sunucudaki API'den ister. Bu yüzden WinForms API'nin bir istemcisi olarak çalışır.
+
+Bir WinForms bir API'ye istek gönderip cevabı kullanırsa bu onun client yapar. 
+veriyi sunucudaki API'den ister. WinForms API'nin bir istemcisi olarak çalışır.
 
 
 ### API Neden Kullanılır?
 
 - Bağlantı Kurar: Farklı uygulamaların birbiriyle veri alışverişi yapmasını sağlar.
-- Güvenlik Sağlar: Kullanıcı doğrudan veritabanına erişmez, sadece API'nin izin verdiği işlemleri yapabilir.
-- Karmaşıklığı Gizler: Arka planın  nasıl çalıştığını bilmeye gerek kalmaz sadece isteğin nasıl gönderileceği bilinir.
-- Tekrar Kullanılabilir: Aynı API'yi web sitesi, mobil uygulama ve başka sistemler ortak kullanabilir.
+- Güvenlik Sağlar: Kullanıcı doğrudan veritabanına erişemez, sadece API'nin izin verdiği işlemleri yapabilir.
+- Karmaşıklığı Gizler: Sadece isteğin nasıl gönderileceği bilinir.
+- Tekrar Kullanılabilir: Aynı API'yi başka sistemler ortak kullanabilir.
 
 ### API Nasıl Çalışır?
 
-API iletişimi istek(request) ve cevap(response) mantığıyla çalışır. İstek gönderen tarafa istemci(client), isteği 
+API iletişimi istek(request) ve cevap(response) mantığıyla çalışır. 
+İstek gönderen tarafa istemci(client), isteği 
 karşılayan tarafa sunucu(server) denir.
 
-Akış şöyledir: İstemci API'ye bir istek gönderir -> Sunucu bu isteği işler -> Sunucu bir cevap döner -> İstemci gelen 
+İstemci API'ye bir istek gönderir -> Sunucu bu isteği işler -> Sunucu bir cevap döner -> İstemci gelen 
 cevabı kullanır.
 
 ### Temel Kavramlar
@@ -175,7 +174,7 @@ cevabı kullanır.
 
 ### REST API ve HTTP Metotları 
 
-Web’de en yaygın API türü REST API’dir. REST API’ler, internetin de kullandığı HTTP protokolü üzerinden çalışır ve 
+Web’de en yaygın API türüdür. REST API’ler HTTP protokolü üzerinden çalışır ve 
 yapılacak işlemi HTTP metotları ile belirtir.
 
 | Metot | Yaptığı iş |
@@ -185,7 +184,7 @@ yapılacak işlemi HTTP metotları ile belirtir.
 | PUT | Var olan veriyi günceller. |
 | DELETE | Veriyi siler. |
 
-Bu dört işlem veritabanındaki temel işlemlerle birebir örtüşür ve CRUD olarak bilinir:
+Bu dört işlem veritabanındaki temel işlemlerdir. CRUD olarak bilinir:
 - Create (oluştur)
 - Read (oku)
 - Update (güncelle)
@@ -205,7 +204,7 @@ Bu dört işlem veritabanındaki temel işlemlerle birebir örtüşür ve CRUD o
 
 ### Veri Formatı:JSON 
 
-API'ler veriyi genellikle JSON formatında gönderir. JSON, hem insanların okuyabildiği hem de proramların kolayca 
+API'ler veriyi JSON formatında gönderir. JSON, hem insanların okuyabildiği hem de proramların kolayca 
 işleyebildiği anahtar deger çiftlerinden oluşan bir metin biçimidr.
 ```
 {
@@ -224,61 +223,62 @@ API, veritabanı ve kullanıcı arasındaki köprüdür. Kullanıcı doğrudan v
 Kullanıcı / Uygulama -> API -> Veritabanı
 
 Örnek akış:
-Kullanıcı GET /ogrenciler/1 isteği gönderir → API bu isteği alır ve arka planda veritabanına SELECT * FROM Ogrenci WHERE 
-OgrenciNo = 1 sorgusunu çalıştırır → Veritabanı sonucu API’ye döner → API bu sonucu JSON’a çevirip kullanıcıya gösterir.
+Kullanıcı GET /ogrenciler/1 isteği gönderir 
+→ API bu isteği alır ve arka planda veritabanına SELECT * FROM Ogrenci WHERE OgrenciNo = 1 sorgusunu çalıştırır
+→ Veritabanı sonucu API’ye döner 
+→ API bu sonucu JSON’a çevirip kullanıcıya gösterir.
 
 
 ## Bir API Nasıl Test Edilir ve Kullanılır?
 
-Bir API'nin doğru çalışıp çalışmadığını kontrol etmek için ona istek gönderilir ve dönen cevap incelenir.
-Bunun için bir kaç yol var:
-- Postman: İstek gönderip cevabı görsel olarak incelemek için kullanılan test aracı.
-- Swagger: API'nin kendi içinde gelen tarayıcı üzerinden test etme imkanı sunan otomatik dokümantasyon aracıdır.
-- Web Tarayıcısı: Sadece GET istekleri için tarayıcıya adresi yazarak sonucu görmek mümkün.
-- Kod ile: Bir uygulamanın içinden API'ye istek göndererek.
+Bir API'nin doğru çalışıp çalışmadığını kontrol etmek için istek gönderilir ve gelen cevap incelenir.
+Bunun yolları şöyledir:
+- Postman: İstek gönderip cevabı görsel olarak incelemek için kullanılır.
+- Swagger: API'nin kendi tarayıcısı üzerinden test edilme imkanı olan araç.
+- Web Tarayıcısı: Sadece GET istekleri için tarayıcıya adresi yazarak sonuc görülür.
+- Kod ile: Uygulamadan API'ye istek göndererek.
 
 ### Test Ederken İzlenen Adımlar
-1. Endpoint belirlenir
+1. Endpoint(adres) belirlenir
 2. HTTP metodu seçilir: GET, POST, PUT veya DELETE
 3. Gerekliyse veri eklenir: POST için gönderilecek JSON
-4. İstek gönderilir ve dönen cevap ile durum kodu incelenir.
+4. İstek gönderilir ve gelen cevap incelenir.
 
 ## Swagger Nedir Nasıl kullanılır?
 
-Bir API'nin sahip oluğu tüm uç noktaları otomatik olarak listeleyen ve tarayıcı üzerinden test etmeye sağlayan test aracıdır.
+Bir API'nin tüm uç noktalarını otomatik olarak listeleyen ve tarayıcı üzerinden test etmemizi sağlayan araç.
 Swagger sayesinde API'nin:
 - Hangi adreslere sahip oldugunu
 - Her adresin hangi metodu kullandığını
-- Ne tür veri beklediğini
-tek bir sayfada görebilir. 
+- Ne tür veri beklediğini tek bir sayfada görebilir. 
 
 ### Swagger Nasıl Kullanılır?
-1. API projesi çalıştırılır.
-2. Açılan sayfada tüm endpointler listelenir.
+1. API projesi çalışır.
+2. Sayfada tüm endpointler(adresler) listelenir.
 3. Try it out butonuna tıklanır.
-4. Gerekli bilgiler girilir(parametre veya JSON body)
-5. Execute butonuna basılır ve dönen cevap ile durumm kodu ekranda görünür.
+4. Gerekli bilgiler girilir.
+5. Execute butonuna basılır ve dönen cevap incelenir.
 
 
 ## Postman Nedir ve Nasıl Kullanılır?
 
-API'lere istek gönderip dönen cevabı incelemeyi sağlayan ayrı olarak kurulan bir API test aracıdır.
+API'lere istek gönderip gelen cevabı incelememizi sağlar. Ayrı olarak kurulan bir API test aracıdır.
 
 ### Postman Nasıl Kullanılır?
-1. Postman indirilir ve kurulur ardından açılır.
+1. Postman açılır.
 2. New → HTTP Request ile yeni bir istek oluşturulur.
-3. İstenen HTTP metodu seçilir: GET, POST, PUT, DELETE.
-4. URL (endpoint) yazılır
-5. Gerekiyorsa: Body sekmesinden gönderilecek JSON verisi, Headers sekmesinden başlık bilgileri eklenir.
-6. Send butonuna basılır; dönen cevap ve durum kodu alt bölümde görüntülenir.
+3. İstenen HTTP metodu seçilir.(GET, POST, PUT, DELETE)
+4. URL (endpoint) yazılır.
+5. Gerekiyorsa Body sekmesinden gönderilecek JSON verisi eklenir.
+6. Send butonuna basılır; dönen cevap görüntülenir.
 
 ### Swagger ile Postman Farkı
 - Swagger API'nin içinde gelir. API'yi geliştirenin sunduğu hazır bir test sayfasıdır.
-- Postman ayrı kurulan bagımsız uygulama. Her türlü API'ye istek göndermek için kullanılır.
+- Postman bagımsız uygulama. Her türlü API'ye istek göndermek için kullanılır.
 
 ### Bir API Nerede Çalışır?
 Bir API sunucu üzerinden çalışır.
-- Geliştirme ekranı: API önce geliştiricinin kendi ekranında çalışır.
+- Geliştirme ekranı: API önce geliştiricinin ekranında çalışır.
 - Web sunucusu: .NET API'leri Kestrel gibi web sunucuları üzerinde çalışır. İstegi alıp API koduna iletir.
 - Yayın ortamı: API bir sunucuya veya buluta yüklenir.
 - Container içinde:DOcker container üzerinde çalışabilir.

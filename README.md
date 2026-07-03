@@ -238,7 +238,7 @@ Bunun için bir kaç yol var:
 - Kod ile: Bir uygulamanın içinden API'ye istek göndererek.
 
 ### Test Ederken İzlenen Adımlar
-1. Endpoint belirlenir: https://localhost:5001/api/ogrenciler
+1. Endpoint belirlenir
 2. HTTP metodu seçilir: GET, POST, PUT veya DELETE
 3. Gerekliyse veri eklenir: POST için gönderilecek JSON
 4. İstek gönderilir ve dönen cevap ile durum kodu incelenir.
@@ -252,9 +252,39 @@ Swagger sayesinde API'nin:
 - Ne tür veri beklediğini
 tek bir sayfada görebilir. 
 
+### Swagger Nasıl Kullanılır?
+1. API projesi çalıştırılır.
+2. Açılan sayfada tüm endpointler listelenir.
+3. Try it out butonuna tıklanır.
+4. Gerekli bilgiler girilir(parametre veya JSON body)
+5. Execute butonuna basılır ve dönen cevap ile durumm kodu ekranda görünür.
 
 
+## Postman Nedir ve Nasıl Kullanılır?
+
+API'lere istek gönderip dönen cevabı incelemeyi sağlayan ayrı olarak kurulan bir API test aracıdır.
+
+### Postman Nasıl Kullanılır?
+1. Postman indirilir ve kurulur ardından açılır.
+2. New → HTTP Request ile yeni bir istek oluşturulur.
+3. İstenen HTTP metodu seçilir: GET, POST, PUT, DELETE.
+4. URL (endpoint) yazılır
+5. Gerekiyorsa: Body sekmesinden gönderilecek JSON verisi, Headers sekmesinden başlık bilgileri eklenir.
+6. Send butonuna basılır; dönen cevap ve durum kodu alt bölümde görüntülenir.
+
+### Swagger ile Postman Farkı
+- Swagger API'nin içinde gelir. API'yi geliştirenin sunduğu hazır bir test sayfasıdır.
+- Postman ayrı kurulan bagımsız uygulama. Her türlü API'ye istek göndermek için kullanılır.
+
+### Bir API Nerede Çalışır?
+Bir API sunucu üzerinden çalışır.
+- Geliştirme ekranı: API önce geliştiricinin kendi ekranında çalışır.
+- Web sunucusu: .NET API'leri Kestrel gibi web sunucuları üzerinde çalışır. İstegi alıp API koduna iletir.
+- Yayın ortamı: API bir sunucuya veya buluta yüklenir.
+- Container içinde:DOcker container üzerinde çalışabilir.
    
+API kullanıcının bilgisayarında değil bir sunucuda çalışır ve HTTP üzerinden gelen istekleri karşılar. Client'lar bu sunucudaki API'ye baglanarak veriyi alır.
+
 
 
 

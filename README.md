@@ -113,13 +113,44 @@ SQL Server bu işlemi Error 547 ile reddeder: “The INSERT statement conflicted
 
 ## API (Application Programming Interface)
 
-## API Nedir?
+## API Nedir? WinForms'tan Farkları Nelerdir?
 
-İki yazılımın birbiriyle konuşmasını, veri alıp göndermesini sağlayan bir arayüzdür.
+API, iki yazılımın birbiriyle konuşmasını, veri alıp göndermesini sağlayan bir arayüzdür.
 Bir API sayesinde, bir programın iç kodunu bilmeden onun sunduğu belirli istek noktaları üzerinden o programın verisini 
 veya işlevini kullanabiliriz.
 
 Uygulama/kullanıcı bir şey ister, API isteği alır getirir, sunucu/veritabanı isteği işler veriyi hazırlar.
+
+WinForms ise .NET ile masaüstü uygulamaları geliştirmek için kullanılan bir arayüzdür.
+Butonlar, metin kutuları, formlar gibi görsel bileşenlerle kullanıcının dogrudan etkileşime girdigi 
+programdır.Kullanıcının bilgisayarında çalışır.
+
+WinForm, kullanıcının gördüğü ve tıkladığı ön yüz. API ise ekranı olmayan, veri sağlayan arka plan servisidir.
+Birbirini tamamlayan katmanlardır.Bir WinForms uygulaması, API'ye istek göndererek veri çekebilir.
+
+| Özellik | API | WinForms | 
+|---------|-----|----------|
+| Amaç | Veri/İşlev sunmak | Kullanıcıya arayüz sunmak |
+| Görsel Arayüz | Yok | Var |
+| Çalıştığı yer | Sunucu | Kullanıcının bilgisayarı |
+| İletişim | HTTP + JSON | Ekran üzerinden kullanıcıyla |
+| Kim Kullanır | Diğer Uygulamalar | Son kullanıcı |
+| Rol | Backend | Frontend/Client | 
+
+## Client ve Server Nedir? WinForms Bir Client Midir?
+
+### Server(sunucu)
+İstekleri karşılayan, veriyi tutan ve işleyen taraftır. Gelen işlemlere cevap verir.
+### Client(istemci)
+Sunucudan bir şey isteyen taraftır. İsteği gönderir sunucunun döndüğü cevabı kullanır. Web tarayıcısı, mobil 
+uygulama,veya masaüstü bir program client olabilir.   
+
+Client istek gönderir -> Server işler -> Server cevap döner -> Client cevabı kullanır
+
+### WinForms bir Client midir? 
+Bir WinForms uygulaması bir API'ye istek gönderip cevabı kullandığında client rolündedir. Kendi içinde veriyi sunmaz 
+veriyi sunucudaki API'den ister. Bu yüzden WinForms API'nin bir istemcisi olarak çalışır.
+
 
 ### API Neden Kullanılır?
 
@@ -143,6 +174,9 @@ cevabı kullanır.
 - Response: Sunucunun geri dönderdiği sonuç.
 
 ### REST API ve HTTP Metotları 
+
+Web’de en yaygın API türü REST API’dir. REST API’ler, internetin de kullandığı HTTP protokolü üzerinden çalışır ve 
+yapılacak işlemi HTTP metotları ile belirtir.
 
 | Metot | Yaptığı iş |
 |-------|------------|
@@ -192,6 +226,47 @@ Kullanıcı / Uygulama -> API -> Veritabanı
 Örnek akış:
 Kullanıcı GET /ogrenciler/1 isteği gönderir → API bu isteği alır ve arka planda veritabanına SELECT * FROM Ogrenci WHERE 
 OgrenciNo = 1 sorgusunu çalıştırır → Veritabanı sonucu API’ye döner → API bu sonucu JSON’a çevirip kullanıcıya gösterir.
+
+
+## Bir API Nasıl Test Edilir ve Kullanılır?
+
+Bir API'nin doğru çalışıp çalışmadığını kontrol etmek için ona istek gönderilir ve dönen cevap incelenir.
+Bunun için bir kaç yol var:
+- Postman: İstek gönderip cevabı görsel olarak incelemek için kullanılan test aracı.
+- Swagger: API'nin kendi içinde gelen tarayıcı üzerinden test etme imkanı sunan otomatik dokümantasyon aracıdır.
+- Web Tarayıcısı: Sadece GET istekleri için tarayıcıya adresi yazarak sonucu görmek mümkün.
+- Kod ile: Bir uygulamanın içinden API'ye istek göndererek.
+
+### Test Ederken İzlenen Adımlar
+1. Endpoint belirlenir: https://localhost:5001/api/ogrenciler
+2. HTTP metodu seçilir: GET, POST, PUT veya DELETE
+3. Gerekliyse veri eklenir: POST için gönderilecek JSON
+4. İstek gönderilir ve dönen cevap ile durum kodu incelenir.
+
+## Swagger Nedir Nasıl kullanılır?
+
+Bir API'nin sahip oluğu tüm uç noktaları otomatik olarak listeleyen ve tarayıcı üzerinden test etmeye sağlayan test aracıdır.
+Swagger sayesinde API'nin:
+- Hangi adreslere sahip oldugunu
+- Her adresin hangi metodu kullandığını
+- Ne tür veri beklediğini
+tek bir sayfada görebilir. 
+
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

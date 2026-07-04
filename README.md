@@ -286,6 +286,37 @@ Bir API sunucu üzerinden çalışır.
 API kullanıcının bilgisayarında değil bir sunucuda çalışır ve HTTP üzerinden gelen istekleri karşılar. Client'lar bu sunucudaki API'ye baglanarak veriyi alır.
 
 
+### İlişkisel Veritabanları(Relational Databases)
+
+Verileri tablolar halinde saklayan veritabanı türüdür. Her tablo satırlar ve sütunlardan oluşur. Tablolar arasında ilişki kurulabildiginden türkçede ilişkisel veritabanı denir.
+
+ Temel Kavramları:
+- Tablo(table): Belirli bir varlığı temsil eder.
+- Satır(row/record/tuple): Tablodaki tek bir kaydı temsil eder.
+- Sütun(attribute/field/column): O kaydın bir özelliğini tutar.
+- Primary Key: Her satırı benzersiz bir şekilde tanımlayan sütun.
+- Foreign Key: Bir tablodaki sütunun başka bir tablonun Primary Key'ine işaret etmesi.
+- İlişki türleri: one-to-one, one-to-many, many-to-many
+- SQL(Structured Query Language): İlişkisel veritabanlarıyla konuştuğun dil,
+- Temel komutları:
+- SELECT: veri okuma/ sorgulama
+- INSERT: yeni kayıt ekleme
+- UPDATE: kayıt güncelleme
+- DELETE: kayıt silme
+- JOIN: birden fazla tabloyu ilişkilerine göre birleştirme
+  
+  
+#### Normalizasyon
+Veriyi tekrarı azaltacak ve tutarlılığı koruyacak şekilde tablolara bölme yöntemi.
+
+#### ACID 
+Güvenilir işlemlerin dört garantisi:
+- Atomicity: bir işlem ya tamamen olur yada olmaz.
+- Consistency: veri kurallara uygun kalır.
+- Isolation: eş zamanlı işlemler birbirini bozmaz.
+- Durability: kaydedilen veri kalıcıdır.
+
+
 
 
 
